@@ -1,4 +1,3 @@
-
 import streamlit as st
 import pandas as pd
 import seaborn as sns
@@ -12,7 +11,7 @@ st.header('Air Quality Dashboard')
 
 # Check if the dataset is available, if not, download and extract it
 if not os.path.exists('PRSA_Data_20130301-20170228.csv'):
-    st.write("Downloading and extracting the dataset...")
+    st.write("Downloading and extracting the dataset from https://github.com/intancitra/air-quality/raw/main/Air-quality-dataset.zip")
 
     # Download the zip file from the GitHub repository
     url = "https://github.com/intancitra/air-quality/raw/main/Air-quality-dataset.zip"
@@ -41,7 +40,7 @@ df_raw = pd.concat([aotizhongxin_df,changping_df,dingling_df,dongsi_df, guanyuan
 # Data Cleaning and Processing
 # Handling missing values
 df_raw['wd'] = df_raw['wd'].fillna(value="NE")
-num_col = df_raw.columns.difference(['wd'])
+num_col = df_raw.select_dtypes(exclude='object').columns
 df_raw[num_col] = df_raw[num_col].fillna(value=df_raw[num_col].median())
 
 # Convert 'date' to datetime and set it as the index
@@ -108,10 +107,10 @@ st.sidebar.title("About")
 st.sidebar.info(
     """
     This dashboard provides insights into air quality data.
-    - Select a station and date range using the sidebar filters.
-    - View average temperature and wind speed.
-    - Explore rain precipitation trends.
-    - Analyze average amounts of vehicle and industrial pollutions by daily.
+    \n- Select a station and date range using the sidebar filters.
+    \n- View average temperature and wind speed.
+    \n- Explore rain precipitation trends.
+    \n- Analyze average amounts of vehicle and industrial pollutions by daily.
 
     **Dashboard Creator:**
     \nCreated by
