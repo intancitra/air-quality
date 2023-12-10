@@ -1,4 +1,4 @@
-# Dicoding Collection Dashboard ✨
+# Air Quality Dashboard ✨
 
 ## Introduction
 
